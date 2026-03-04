@@ -1,4 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+let API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+if (API_URL && !API_URL.endsWith('/api') && API_URL !== 'http://localhost:3000') {
+    API_URL = `${API_URL}/api`;
+}
 
 async function authFetch(url: string, options: RequestInit = {}) {
     const token = localStorage.getItem('salon_token');
