@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon, DollarSign, Users, CalendarX, TrendingUp } from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react';
 
 interface MetricCardProps {
     title: string;

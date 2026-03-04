@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CalendarCheck, TrendingUp, Users, Clock, ShieldCheck, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { CalendarCheck, TrendingUp, Clock, ChevronRight, CheckCircle2 } from 'lucide-react';
 
 export default function LandingView() {
     // 🔗 NEXANO CHECKOUT LINKS

@@ -2,9 +2,9 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 async function authFetch(url: string, options: RequestInit = {}) {
     const token = localStorage.getItem('salon_token');
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
         'Content-Type': 'application/json',
-        ...options.headers,
+        ...(options.headers as Record<string, string>),
     };
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
