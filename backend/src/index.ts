@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // --- AUTH & SAAS ENDPOINTS --- //
