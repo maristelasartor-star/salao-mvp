@@ -148,13 +148,12 @@ export default function LandingView() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-                        {/* Plan START */}
                         <div className="relative p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow">
-                            <h3 className="text-2xl font-bold mb-2">Start</h3>
+                            <h3 className="text-2xl font-bold mb-2">Start (Teste)</h3>
                             <p className="text-muted-foreground mb-6">Para estúdios pequenos e autônomos.</p>
                             <div className="flex items-end gap-1 mb-8">
-                                <span className="text-5xl font-black">R$ 69</span><span className="text-xl font-bold">,90</span>
-                                <span className="text-muted-foreground mb-1 ml-1">/ mês</span>
+                                <span className="text-5xl font-black">Grátis</span>
+                                <span className="text-muted-foreground mb-1 ml-2">por 7 dias</span>
                             </div>
                             <ul className="space-y-4 mb-8">
                                 {['Até 2 Profissionais', 'Serviços Ilimitados', 'Agenda Online (Link Bio)', 'Dashboard Simplificado'].map(i => (
