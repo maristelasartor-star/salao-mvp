@@ -5,10 +5,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const navigation = [
     { name: 'Dashboard', icon: LayoutDashboard, id: 'dashboard', path: '/dashboard' },
     { name: 'Agenda', icon: Calendar, id: 'agenda', path: '/dashboard/agenda' },
-    { name: 'Lista de Espera', icon: ListOrdered, id: 'waitlist', path: '/dashboard/waitlist' },
+    { name: 'Espera', icon: ListOrdered, id: 'waitlist', path: '/dashboard/waitlist' },
     { name: 'Clientes', icon: Users, id: 'clientes', path: '/dashboard/clientes' },
     { name: 'Serviços', icon: Scissors, id: 'servicos', path: '/dashboard/servicos' },
-    { name: 'Profissionais', icon: GraduationCap, id: 'profissionais', path: '/dashboard/profissionais' },
+    { name: 'Equipe', icon: GraduationCap, id: 'profissionais', path: '/dashboard/profissionais' },
+    { name: 'Ajustes', icon: Settings, id: 'configuracoes', path: '/dashboard/configuracoes' },
 ];
 
 interface SidebarProps {
@@ -73,17 +74,6 @@ export function Sidebar({ onViewChange }: SidebarProps) {
             </nav>
 
             <div className="hidden md:block p-4 border-t border-border mt-auto">
-                <button
-                    onClick={() => handleNavigation('configuracoes', '/dashboard/configuracoes')}
-                    className={`w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all group ${location.pathname === '/dashboard/configuracoes'
-                        ? 'bg-primary/10 text-primary font-semibold'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                        }`}
-                >
-                    <Settings className={`w-5 h-5 mr-3 transition-colors ${location.pathname === '/dashboard/configuracoes' ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
-                        }`} />
-                    Configurações
-                </button>
                 <button
                     onClick={handleLogout}
                     className="w-full flex items-center px-3 py-2.5 mt-2 text-sm font-medium text-destructive/80 rounded-lg hover:bg-destructive/10 hover:text-destructive transition-all group"
