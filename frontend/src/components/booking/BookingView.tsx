@@ -54,26 +54,39 @@ export function BookingView() {
                 const workStart = 9 * 60;
                 const workEnd = 18 * 60;
 
-                let totalOccupiedMins = 0;
+                // Build a list of occupied intervals for the selected professional
+                const occupied: { start: number; end: number }[] = [];
                 apts.forEach((a: any) => {
-                    if (a.service?.durationMins) totalOccupiedMins += a.service.durationMins;
-                    else totalOccupiedMins += 60; // Block default
+                    const start = a.startTime ? parseInt(a.startTime.split(':')[0]) * 60 + parseInt(a.startTime.split(':')[1]) : 0;
+                    const duration = a.service?.durationMins ?? 60;
+                    occupied.push({ start, end: start + duration });
                 });
 
-                const totalAvailableMins = workEnd - workStart;
+                // Generate candidate times in 30‑minute steps
+                const step = 30;
+                const candidates: string[] = [];
+                for (let mins = workStart; mins + (selectedService?.durationMins ?? 30) <= workEnd; mins += step) {
+                    const hour = Math.floor(mins / 60).toString().padStart(2, '0');
+                    const minute = (mins % 60).toString().padStart(2, '0');
+                    candidates.push(`${hour}:${minute}`);
+                }
 
-                if ((totalOccupiedMins + selectedService.durationMins) > totalAvailableMins) {
+                // Filter out times that would overlap any occupied interval
+                const filtered = candidates.filter((time) => {
+                    const start = parseInt(time.split(':')[0]) * 60 + parseInt(time.split(':')[1]);
+                    const end = start + (selectedService?.durationMins ?? 30);
+                    return !occupied.some((int) => !(end <= int.start || start >= int.end));
+                });
+
+                const mockTimes = filtered;
+                if (mockTimes.length === 0) {
                     setDayIsFull(true);
                     setAvailableTimes([]);
                 } else {
-                    const mockTimes = ['09:00', '10:00', '11:00', '14:00', '15:30', '16:00', '17:00'].filter(t => !apts.find((a: any) => a.startTime === t));
-                    if (mockTimes.length === 0) {
-                        setDayIsFull(true);
-                        setAvailableTimes([]);
-                    } else {
-                        setAvailableTimes(mockTimes);
-                    }
+                    setAvailableTimes(mockTimes);
                 }
+
+
             } catch (err) {
                 console.error("Erro ao buscar vagas", err);
             } finally {
