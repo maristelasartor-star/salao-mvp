@@ -108,8 +108,14 @@ export function BookingView() {
         );
     }
 
-    const nextStep = () => setStep(s => Math.min(s + 1, 5));
-    const prevStep = () => setStep(s => Math.max(s - 1, 1));
+    const nextStep = () => {
+        setStep(s => Math.min(s + 1, 5));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    const prevStep = () => {
+        setStep(s => Math.max(s - 1, 1));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <div className="max-w-3xl mx-auto py-10 px-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
