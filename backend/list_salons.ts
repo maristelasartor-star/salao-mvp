@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 
 async function main() {
     try {
-        const salons = await prisma.salon.findMany({ select: { email: true, plan: true } });
+        const salons = await prisma.salon.findMany({ select: { email: true, plan: true, slug: true } });
         console.log("Salões cadastrados:");
-        salons.forEach(s => console.log(`- ${s.email} (Plano: ${s.plan})`));
+        salons.forEach(s => console.log(`- ${s.email} (Plano: ${s.plan}) [Slug: ${s.slug}]`));
     } catch (e) {
         console.error("ERRO:", e);
     } finally {

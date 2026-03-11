@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { api } from '../../lib/api';
 import { useAuth } from '../../context/AuthContext';
 import { AlertCircle, Loader2 } from 'lucide-react';
@@ -14,6 +14,18 @@ export function RegisterView() {
 
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Parse query params for plan and email
+    const queryParams = new URLSearchParams(location.search);
+    const planParam = queryParams.get('plan');
+    const emailParam = queryParams.get('email');
+    const isPaid = queryParams.get('paid') === 'true';
+
+    // Initial state with param email if present
+    useState(() => {
+        if (emailParam) setEmail(emailParam);
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -52,7 +64,11 @@ export function RegisterView() {
                     Crie sua Conta
                 </h2>
                 <p className="mt-2 text-center text-sm text-muted-foreground">
-                    Inicie seu teste grátis de 7 dias no plano Start.
+                    {planParam ? (
+                        <>Complete seu cadastro para ativar seu plano <span className="font-bold text-primary capitalize">{planParam}</span>.</>
+                    ) : (
+                        "Inicie seu teste grátis de 7 dias no plano Start."
+                    )}
                 </p>
             </div>
 

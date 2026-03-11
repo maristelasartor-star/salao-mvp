@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CalendarCheck, TrendingUp, Clock, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 export default function LandingView() {
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
     // 🔗 NEXANO CHECKOUT LINKS
     const NEXANO_CHECKOUT_PRO = "https://checkout.nexano.com.br/checkout/cmm9xa6w1054n1yp9i3rblp4z?offer=8ZXJ2YN";
     const NEXANO_CHECKOUT_ELITE = "https://checkout.nexano.com.br/checkout/cmm9xa6w1054n1yp9i3rblp4z?offer=W8IH9BI";
@@ -168,7 +171,12 @@ export default function LandingView() {
                                     <div className="w-5 h-5 border-2 border-muted-foreground/30 rounded-full flex-shrink-0" /> <span className="text-sm line-through">Métricas de Faltosos</span>
                                 </li>
                             </ul>
-                            <Link to="/register" className="block w-full py-4 rounded-xl border-2 border-primary text-primary font-bold text-center hover:bg-primary/5 transition-colors">Testar Grátis</Link>
+                            <button
+                                onClick={() => isAuthenticated ? window.open(NEXANO_CHECKOUT_PRO, '_blank') : navigate('/register?plan=pro')}
+                                className="block w-full py-4 rounded-xl border-2 border-primary text-primary font-bold text-center hover:bg-primary/5 transition-colors"
+                            >
+                                Testar Grátis
+                            </button>
                         </div>
 
                         {/* Plan PRO (Highlight) */}
@@ -189,7 +197,12 @@ export default function LandingView() {
                                     </li>
                                 ))}
                             </ul>
-                            <a href={NEXANO_CHECKOUT_PRO} target="_blank" rel="noopener noreferrer" className="block w-full py-4 rounded-xl bg-white text-primary font-bold text-center hover:bg-white/90 shadow-xl transition-colors">Assinar o Pro</a>
+                            <button
+                                onClick={() => isAuthenticated ? window.open(NEXANO_CHECKOUT_PRO, '_blank') : navigate('/register?plan=pro')}
+                                className="block w-full py-4 rounded-xl bg-white text-primary font-bold text-center hover:bg-white/90 shadow-xl transition-colors"
+                            >
+                                Assinar o Pro
+                            </button>
                         </div>
 
                         {/* Plan ELITE */}
@@ -207,7 +220,12 @@ export default function LandingView() {
                                     </li>
                                 ))}
                             </ul>
-                            <a href={NEXANO_CHECKOUT_ELITE} target="_blank" rel="noopener noreferrer" className="block w-full py-4 rounded-xl border-2 border-border text-foreground font-bold text-center hover:bg-muted transition-colors">Falar com Consultor</a>
+                            <button
+                                onClick={() => isAuthenticated ? window.open(NEXANO_CHECKOUT_ELITE, '_blank') : navigate('/register?plan=elite')}
+                                className="block w-full py-4 rounded-xl border-2 border-border text-foreground font-bold text-center hover:bg-muted transition-colors"
+                            >
+                                Assinar Plano Elite
+                            </button>
                         </div>
                     </div>
                 </div>
