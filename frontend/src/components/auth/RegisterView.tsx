@@ -20,7 +20,6 @@ export function RegisterView() {
     const queryParams = new URLSearchParams(location.search);
     const planParam = queryParams.get('plan');
     const emailParam = queryParams.get('email');
-    const isPaid = queryParams.get('paid') === 'true';
 
     // Initial state with param email if present
     useState(() => {
